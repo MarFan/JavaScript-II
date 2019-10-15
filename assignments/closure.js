@@ -4,12 +4,34 @@
 // that manipulates variables defined in the outer scope.
 // The outer scope can be a parent function, or the top level of the script.
 
+function shazam() {
+  var firstName = 'Mr. Jonah'; 
+  
+  function sayMyName() { 
+    var lastName = 'Aitchison'
+    console.log(`Hello, ${firstName} ${lastName}`);
+  }
+
+  sayMyName();
+}
+shazam();
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
 
 
 // ==== Challenge 2: Implement a "counter maker" function ====
-const counterMaker = () => {
+const counterMaker = (limit) => {
+  let count = 0;
+  
+  function counter() {
+    if (count >= limit){
+      return count = 1
+    }else{
+      return ++count;
+    }
+  }
+  
+  return counter;
   // IMPLEMENTATION OF counterMaker:
   // 1- Declare a `count` variable with a value of 0. We will be mutating it, so declare it using `let`!
   // 2- Declare a function `counter`. It should increment and return `count`.
@@ -20,14 +42,51 @@ const counterMaker = () => {
 // Example usage: const myCounter = counterMaker();
 // myCounter(); // 1
 // myCounter(); // 2
+const myCounter = counterMaker(5);
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
 
 // ==== Challenge 3: Make `counterMaker` more sophisticated ====
 // It should have a `limit` parameter. Any counters we make with `counterMaker`
 // will refuse to go over the limit, and start back at 1.
 
+      // ^^ Look above for Challenge 3 ---^^^
+
+
 // ==== Challenge 4: Create a counter function with an object that can increment and decrement ====
 const counterFactory = () => {
+
   // Return an object that has two methods called `increment` and `decrement`.
   // `increment` should increment a counter variable in closure scope and return it.
   // `decrement` should decrement the counter variable and return it.
+
+  let counter = 0;
+
+  let increment = function(num){
+    counter += num;
+    console.log(counter)
+  }
+
+  let decrement = function(num){
+    counter -= num;
+    console.log(counter)
+  }
+
+  return {increment: increment, decrement: decrement}
+
 };
+
+const myCounterFactory = counterFactory();
+
+console.log(myCounterFactory.increment(1))
+console.log(myCounterFactory.increment(1))
+console.log(myCounterFactory.increment(1))
+console.log(myCounterFactory.increment(1))
+console.log(myCounterFactory.decrement(2))
